@@ -1,4 +1,5 @@
 /* app css stylesheet */
+html,body{height:100%}
 
 .menu {
   list-style: none;
@@ -27,4 +28,12 @@
 .menu > li:nth-child(1):before {
   content: "";
   padding: 0;
+}
+
+div.red {
+  background-color: orangered;
+}
+
+div.green {
+  background-color: green;
 }
