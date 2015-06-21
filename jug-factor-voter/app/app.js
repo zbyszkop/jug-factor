@@ -9,6 +9,8 @@ angular.module('myApp', [
   'ngResource',
   'ui.bootstrap.alert'
 
-]).config(['$routeProvider', function($routeProvider) {
+]).config(['$routeProvider','$httpProvider', function($routeProvider,$httpProvider) {
   $routeProvider.otherwise({redirectTo: '/vote'});
+  $httpProvider.defaults.useXDomain = true;
+  delete $httpProvider.defaults.headers.common['X-Requested-With'];
 }]);

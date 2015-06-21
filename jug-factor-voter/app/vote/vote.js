@@ -13,19 +13,20 @@ angular.module('myApp.vote', ['ngRoute','ngResource','myApp.resources'])
 
         $scope.like= function(){
             console.log("LIKE");
-            vote("LIKE")
+            vote("like")
         };
 
        $scope.dislike=function(){
            console.log("DISLIKE");
-           vote("DISLIKE");
+           vote("dislike");
        };
 
        var vote = function(type){
-           var vote = Events;
-           vote.type=type;
+           var vote = new Events();
+           vote.eventType=type;
+           console.log("Vote!");
            console.log(vote);
-           vote.save(function(){},errorDisplay);
+           vote.$save(function(){},errorDisplay);
        };
 
         $scope.addAlert = function(alert) {
@@ -38,10 +39,10 @@ angular.module('myApp.vote', ['ngRoute','ngResource','myApp.resources'])
         };
 
         $scope.comments = function(){
-            var comment = Events;
-            comment.eventType="COMMENT";
+            var comment = new Events();
+            comment.eventType="comment";
             comment.comment=$scope.comment;
-            comment.save(function(){}, errorDisplay);
+            comment.$save(function(){}, errorDisplay);
             console.log("Comment: "+$scope.comment);
         };
 

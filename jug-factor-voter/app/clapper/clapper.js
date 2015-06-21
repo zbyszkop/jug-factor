@@ -12,7 +12,7 @@ angular.module('myApp.clapper', ['ngRoute','ngResource','myApp.resources'])
             if($scope.color=='red') {
                 $scope.color = 'green';
                 var clapper = new Events();
-                clapper.type="CLAPPER";
+                clapper.eventType="clapper";
                 clapper.id="ala ma kota";
                 clapper.$save();
             } else {
