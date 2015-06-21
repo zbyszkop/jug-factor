@@ -24,6 +24,8 @@ angular.module('myApp.admin', ['ngRoute', 'ngResource'])
             $scope.events=result;
         });
 
+        $scope.startTime='';
+
         var checkDuration={};
 
         $scope.$watch('presentation.url',function(){
@@ -38,9 +40,7 @@ angular.module('myApp.admin', ['ngRoute', 'ngResource'])
                         }
                     },1000
                 )
-
             } else {
-
                 Popcorn.destroy($scope.pop);
             }
         },true)
