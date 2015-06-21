@@ -4,6 +4,7 @@
 angular.module('myApp', [
   'ngRoute',
   'myApp.player',
+  'myApp.admin',
   'myApp.presentations'
 ])
 .value('serverUrl', 'http://localhost:8080')
