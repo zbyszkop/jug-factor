@@ -1,6 +1,13 @@
 <form>
+    <div>
+        <label for="title">Tytuł prezentacji</label>
+        <input id="title" ng-model="presentation.title" required="required">
+    </div>
     <label for="movieUrl">Url filmu</label>
-    <input id="movieUrl" ng-model="{presentation.url}" type="url"><br>
-
+    <input id="movieUrl" ng-model="presentation.url" required="required"><br>
+    <label for="claps">Wybierz klaps startowy</label>
+    <select id="claps" data-ng-model="clapper" ng-required="true" required="required" ng-options="event.timestamp for event in events"></select>
+    <button ng-click="save()">Zapisz</button>
 
 </form>
+<div id="video" style="height:360; width: 480px;"></div>

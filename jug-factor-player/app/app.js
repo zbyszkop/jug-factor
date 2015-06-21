@@ -3,7 +3,8 @@
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
   'ngRoute',
-  'myApp.player'
+  'myApp.player',
+  'myApp.admin'
 ])
 .value('serverUrl', 'http://localhost:8080')
 .config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
