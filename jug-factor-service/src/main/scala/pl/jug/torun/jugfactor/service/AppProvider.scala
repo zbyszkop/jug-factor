@@ -4,6 +4,7 @@ import com.typesafe.config.ConfigFactory
 import org.eclipse.jetty.server.Server
 import org.eclipse.jetty.servlet.ServletHolder
 import org.eclipse.jetty.webapp.WebAppContext
+import org.scalatra.CorsSupport
 import org.slf4j.LoggerFactory
 import pl.jug.torun.jugfactor.service.data.DataModule
 import pl.jug.torun.jugfactor.service.web.WebModule

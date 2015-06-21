@@ -15,37 +15,24 @@ angular.module('myApp.player', ['ngRoute', 'ngResource'])
 
         $scope.footnote = ""
         $scope.presentation = {
-            "id": "123123123",
-            "videoUrl":"https://www.youtube.com/watch?v=Ms3jmcPQi70",
+            "id": "558626b0d4c69fc2c7edfbb6",
+            "title": "Xenoblade",
+            "videoUrl": "https://www.youtube.com/watch?v=AvpNXhzscjQ",
+            "startTime": 1434854534094,
+            "duration": 168,
             "annotations": [
                 {
-                    "offset":1,
+                    "offset": 6,
                     "eventType": "like"
                 },
                 {
-                    "offset":4,
-                    "eventType": "dislike"
-                },
-                {
-                    "offset":1800,
-                    "eventType":"comment",
-                    "comment":"Dobrze prawi, dać mu piwa"
-                },
-                {
-                    "offset":400,
+                    "offset": 9,
                     "eventType": "like"
                 },
-                ,
                 {
-                    "offset":1500,
-                    "eventType": "like"
-                },
-
-                {
-                    "offset":1700,
+                    "offset": 13,
                     "eventType": "dislike"
                 }
-
             ]
         }
         
@@ -70,24 +57,24 @@ angular.module('myApp.player', ['ngRoute', 'ngResource'])
                 ctx.globalAlpha=1.0;
                 
                 
-                if (!$scope.annotations) {
+                if (!$scope.drawnAnnotations ) {
                    $scope.presentation.annotations.forEach(function(annotation) {
                        function fillRect(color, annotation) {
                            ctx.fillStyle = color;
-                           ctx.fillRect($scope.width * offset / duration, 0, $scope.width * 5 / duration, 100);
+                           ctx.fillRect($scope.width * annotation.offset / duration, 0, $scope.width * 5 / duration, 100);
                        }
 
                        if (annotation.eventType == 'like') {
-                           fillRect("#003cb3", annotation.offset);
+                           fillRect("#003cb3", annotation);
                        }
                        if (annotation.eventType == 'dislike') {
-                           fillRect("#cf293f", annotation.offset);
+                           fillRect("#cf293f", annotation);
                        }
                        if (annotation.eventType == 'comment') {
-                           fillRect("#f2e699", annotation.offset);
+                           fillRect("#f2e699", annotation);
                        }
-                       
-                       
+                       $scope.drawnAnnotations = true
+
                    }) 
                 }
             }
