@@ -21,11 +21,11 @@ class AnnotationEventController(annotationEventRepository: AnnotationEventReposi
   
   get("/") {
     response.setHeader("Access-Control-Allow-Headers", request.getHeader("Access-Control-Request-Headers"))
-    contentType="text/html"
-
-    <html>
-      <body>AnnotationEvent controller</body>
-    </html>
+    params.get("eventType") match {
+      case Some(eventType) => annotationEventRepository.all().filter(_.eventType == eventType)
+      case None => annotationEventRepository.all()
+    }
+    
   }
 
   post("/") {
