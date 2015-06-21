@@ -36,6 +36,12 @@ angular.module('myApp.player', ['ngRoute', 'ngResource'])
             ]
         }
         
+        PresentationService.get({"id":"558626b0d4c69fc2c7edfbb6"}, function(value) {
+            $scope.presentation = value;
+
+        })
+        console.log($scope.presentation)
+        
         $scope.annotationRects = []
         
         $scope.currentTime = {} 
@@ -47,24 +53,26 @@ angular.module('myApp.player', ['ngRoute', 'ngResource'])
         $scope.timeInterval = $interval(function() {
             var duration = $scope.pop.duration()
             var currentTime = $scope.pop.roundTime()
-            if (duration != NaN) {
+            if (!isNaN(duration)) {
                 var c = document.getElementById("seekbar");
                 var playbackWidth = $scope.width * currentTime / duration
                 var ctx = c.getContext("2d");
                 ctx.fillStyle = "#0b8027";
-                ctx.globalAlpha=0.2;
+                ctx.globalAlpha=0.01;
                 ctx.fillRect(0, 0, playbackWidth, 100);
                 ctx.globalAlpha=1.0;
-                
-                
-                if (!$scope.drawnAnnotations ) {
+
+
+                if (!$scope.drawnAnnotations) {
                    $scope.presentation.annotations.forEach(function(annotation) {
                        function fillRect(color, annotation) {
                            ctx.fillStyle = color;
+                           console.log(duration)
                            ctx.fillRect($scope.width * annotation.offset / duration, 0, $scope.width * 5 / duration, 100);
                        }
 
                        if (annotation.eventType == 'like') {
+                           console.log("in like draw")
                            fillRect("#003cb3", annotation);
                        }
                        if (annotation.eventType == 'dislike') {
@@ -75,12 +83,12 @@ angular.module('myApp.player', ['ngRoute', 'ngResource'])
                        }
                        $scope.drawnAnnotations = true
 
-                   }) 
+                   })
                 }
             }
-            
+
         })
-        
+
         
         $scope.timeoutFootnote = function() {
             console.log("inside timeout footnote")
@@ -125,22 +133,7 @@ angular.module('myApp.player', ['ngRoute', 'ngResource'])
     }])
 .factory('PresentationService', ['$resource',
   function($resource){
-    var cos = {};
-    cos.get = {
-        "id": "123123123",
-        "videoUrl":"http://www.youtube.com/watch?v=9oar9glUCL0",
-        "annotations": [
-            {
-                "offset":123,
-                "type": "like"
-            },
-            {
-                "offset":645,
-                "type": "dislike"
-            }
-        ]
-    }
-    return cos;
+    return new $resource('http://localhost:8080/presentation/:id')
   }])
 .directive('footnote', function() {
         return {

@@ -32,7 +32,11 @@ class AnnotationEventController(annotationEventRepository: AnnotationEventReposi
     response.setHeader("Access-Control-Allow-Headers", request.getHeader("Access-Control-Request-Headers"))
     val annotationEventInput = parsedBody.extract[AnnotationEventInput]
 
-    val annotationEvent = AnnotationEvent(System.currentTimeMillis(), annotationEventInput.eventType)
+    val annotationEvent = AnnotationEvent(System.currentTimeMillis(), annotationEventInput.eventType, annotationEventInput.comment match {
+      case Some(comment) => comment
+      case None => ""
+      
+    })
 
     annotationEventRepository.add(annotationEvent)
   }
