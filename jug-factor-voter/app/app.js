@@ -6,7 +6,8 @@ angular.module('myApp', [
   'myApp.vote',
   'myApp.clapper',
   'myApp.resources',
-  'ngResource'
+  'ngResource',
+  'ui.bootstrap.alert'
 
 ]).config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/vote'});

@@ -1,5 +1,5 @@
 <div ng-controller="VoteCtrl" id="vote">
-    <div class="btn-toolbar">
+    <div class="form-group">
         <button class="btn like" ng-click="like()"><i class="fa fa-thumbs-o-up fa-4x"></i></button>
         <button ng-click="dislike()" class="btn dislike"><i class="fa fa-thumbs-o-down fa-4x"></i></button>
     </div>
@@ -10,4 +10,7 @@
         <button ng-click="comments()" class="btn btn-primary">OK</button>
 
     </div>
-</form>
+
+    <alert class="form-error" ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.message}}</alert>
+
+</div>

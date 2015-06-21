@@ -9,6 +9,7 @@ angular.module('myApp.vote', ['ngRoute','ngResource','myApp.resources'])
 }])
 .controller('VoteCtrl',['$scope','Events',function($scope,Events){
         $scope.comment='';
+        $scope.alerts=[];
 
         $scope.like= function(){
             console.log("LIKE");
@@ -24,14 +25,28 @@ angular.module('myApp.vote', ['ngRoute','ngResource','myApp.resources'])
            var vote = Events;
            vote.type=type;
            console.log(vote);
-           vote.save();
+           vote.save(function(){},errorDisplay);
        };
+
+        $scope.addAlert = function(alert) {
+            $scope.alerts.push(alert);
+
+        };
+
+        $scope.closeAlert = function(index) {
+            $scope.alerts.splice(index, 1);
+        };
 
         $scope.comments = function(){
             var comment = Events;
-            comment.type="COMMENT";
+            comment.eventType="COMMENT";
             comment.comment=$scope.comment;
-            comment.save();
+            comment.save(function(){}, errorDisplay);
             console.log("Comment: "+$scope.comment);
-        }
+        };
+
+        var errorDisplay=function (error){
+            console.log(error);
+            $scope.alerts.push({type:"danger","message":error.statusText})
+        };
 }]);
