@@ -1,8 +1,8 @@
 <div>
-    <ul class="presentations-list" ng-if="presentations.length">
-        <li ng-repeat="presentation in presentations" >
+    <ul class="presentation-list" ng-if="presentations.length">
+        <li ng-repeat="presentation in presentations" class="presentation-list-el">
             <a ng-href="#/player/{{presentation.id}}">
-                <div class="presentation">
+                <div class="presentation-title">
                     {{presentation.title}}
                 </div>
 

@@ -1,0 +1,25 @@
+
+.presentation-list {
+    list-style: none;
+    margin: 30px 5px;
+    padding: 0;
+}
+
+
+.presentation-list-el {
+    margin: 0 0 8px 0;
+    padding: 0 0 8px 0;
+    list-style: none;
+    border-bottom: 1px dashed #ccc;
+}
+
+.presentation-list-el a:hover {
+    text-decoration: none;
+}
+
+.presentation-title {
+    vertical-align: top;
+    display: inline-block;
+    font: bold 20px/1.5 Helvetica, Verdana, sans-serif;
+    padding: 5px 0 0 0;
+}

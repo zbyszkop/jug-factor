@@ -12,7 +12,7 @@ angular.module('myApp.player', ['ngRoute', 'ngResource'])
         function($scope, $timeout, $interval, $routeParams, PresentationService) {
 
         $scope.width = 960;
-
+        console.log()
         $scope.footnote = ""
         $scope.presentation = {}
         PresentationService.get({"id": $routeParams.id}, function(value) {

@@ -16,7 +16,7 @@ trait SalatContext {
       MongoDBObject("url" -> p.url, "title" -> p.title, "startTime" -> p.startTime, "duration" -> p.duration)
 
     def deserialize(o: DBObject): Presentation = {
-      Presentation(o.get("id").asInstanceOf[ObjectId], o.get("title").asInstanceOf[String], o.get("url").asInstanceOf[String],
+      Presentation(o.get("id").asInstanceOf[Option[ObjectId]], o.get("title").asInstanceOf[String], o.get("url").asInstanceOf[String],
         o.get("startTime").asInstanceOf[Long], o.get("duration").asInstanceOf[Long])
     }
 
