@@ -4,7 +4,7 @@ import com.mongodb.casbah.MongoClient
 import com.softwaremill.macwire.MacwireMacros._
 import com.typesafe.config.Config
 import org.slf4j.LoggerFactory
-import pl.jug.torun.jugfactor.service.core.AnnotationEventRepository
+import pl.jug.torun.jugfactor.service.core.{PresentationRepository, AnnotationEventRepository}
 
 trait DataModule {
 
@@ -22,9 +22,9 @@ trait DataModule {
 
   lazy val db = mongo(config.getString("mongo.db"))
 
-//  lazy val locationCollection = db(config.getString("mongo.collections.locations"))
-//  lazy val locationRepository: LocationRepository = wire[MongoLocationRepository]
+  lazy val presentationCollection = db(config.getString("mongo.collections.presentations"))
+  lazy val presentationRepository: PresentationRepository = new MongoPresentationRepository(presentationCollection)
 
   lazy val annotationEventCollection = db(config.getString("mongo.collections.annotationEvents"))
-  lazy val annotationEventRepository: AnnotationEventRepository = wire[MongoAnnotationEventRepository]
+  lazy val annotationEventRepository: AnnotationEventRepository = new MongoAnnotationEventRepository(annotationEventCollection)
 }
