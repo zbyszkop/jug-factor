@@ -39,7 +39,8 @@ class PresentationController(annotationEventRepository: AnnotationEventRepositor
          val annotations = annotationEventRepository.all().filter(p => p.timestamp >= startTime && p.timestamp <= endTime).toList;
 
          PresentationOutput(id, presentation.title, presentation.url, presentation.startTime, presentation.duration,
-         annotations.filter{_.eventType != "clapper"}.map (event => AnnotationEventOutput((event.timestamp - presentation.startTime)/1000 ,event.eventType)));
+         annotations.filter{_.eventType != "clapper"}.map (event => AnnotationEventOutput((event.timestamp - presentation.startTime)/1000 , 
+           event.eventType, Some(event.comment))));
        }
        case None => NotFound(s"Location not found: ${params("id")}")
      }

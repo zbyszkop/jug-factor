@@ -19,6 +19,16 @@
 
 .presentation-title {
     vertical-align: top;
+
+    display: inline-block;
+    font: bold 20px/1.5 Helvetica, Verdana, sans-serif;
+    padding: 5px 0 0 0;
+}
+
+.presentation-hour {
+    vertical-align: top;
+    color: #666;
+    float: right;
     display: inline-block;
     font: bold 20px/1.5 Helvetica, Verdana, sans-serif;
     padding: 5px 0 0 0;

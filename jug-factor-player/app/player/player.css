@@ -1,0 +1,23 @@
+.video {
+
+}
+
+.playback-canvas {
+
+}
+
+.footnote-div {
+    vertical-align: top;
+    text-align: center;
+    font: bold 25px/1.5 Helvetica, Verdana, sans-serif;
+    padding: 5px 0 0 0;
+}
+
+.video-container {
+    vertical-align: top;
+    width: 960px;
+    margin:0 auto;
+
+    font: bold 20px/1.5 Helvetica, Verdana, sans-serif;
+    padding: 5px 0 0 0;
+}

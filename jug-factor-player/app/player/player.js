@@ -12,12 +12,13 @@ angular.module('myApp.player', ['ngRoute', 'ngResource'])
         function($scope, $timeout, $interval, $routeParams, PresentationService) {
 
         $scope.width = 960;
-        console.log()
+        $scope.seekbarCtx = document.getElementById("seekbar").getContext("2d");
+        $scope.seekbarCtx.clearRect(0, 0,  $scope.width, 100);
         $scope.footnote = ""
         $scope.presentation = {}
         PresentationService.get({"id": $routeParams.id}, function(value) {
             $scope.presentation = value;
-
+            console.log($scope)
             $scope.pop = Popcorn.smart( "#video", $scope.presentation.videoUrl);
             $scope.pop.controls( true );
             $scope.presentation.annotations.forEach(function(annotation) {
@@ -29,20 +30,15 @@ angular.module('myApp.player', ['ngRoute', 'ngResource'])
                 var duration = $scope.pop.duration()
                 var currentTime = $scope.pop.roundTime()
                 if (!isNaN(duration)) {
-                    var c = document.getElementById("seekbar");
-                    var playbackWidth = $scope.width * currentTime / duration
-                    var ctx = c.getContext("2d");
-                    ctx.fillStyle = "#0b8027";
-                    ctx.globalAlpha=0.01;
-                    ctx.fillRect(0, 0, playbackWidth, 100);
-                    ctx.globalAlpha=1.0;
 
 
                     if (!$scope.drawnAnnotations) {
                         $scope.presentation.annotations.forEach(function(annotation) {
+                            $scope.seekbarCtx.globalAlpha=1.0;
+
                             function fillRect(color, annotation) {
-                                ctx.fillStyle = color;
-                                ctx.fillRect($scope.width * annotation.offset / duration, 0, $scope.width * 5 / duration, 100);
+                                $scope.seekbarCtx.fillStyle = color;
+                                $scope.seekbarCtx.fillRect($scope.width * annotation.offset / duration, 0, $scope.width * 5 / duration, 100);
                             }
 
                             if (annotation.eventType == 'like') {
@@ -57,6 +53,11 @@ angular.module('myApp.player', ['ngRoute', 'ngResource'])
                             $scope.drawnAnnotations = true
 
                         })
+                    } else {
+                        var playbackWidth = $scope.width * currentTime / duration
+                        $scope.seekbarCtx.fillStyle = "#0b8027";
+                        $scope.seekbarCtx.globalAlpha=0.01;
+                        $scope.seekbarCtx.fillRect(0, 0, playbackWidth, 100);
                     }
                 }
 
@@ -87,15 +88,17 @@ angular.module('myApp.player', ['ngRoute', 'ngResource'])
 
 
         $scope.$on("footnoteChange" , function (event, annotation)  {
+            console.log($scope)
             if(annotation.eventType === 'like') {
-                $scope.footnote = "someone likes this";
+                $scope.footnote = "Komuś się podoba!!";
 
             }
             if(annotation.eventType == 'dislike') {
-                $scope.footnote = "someone doesn't like this";
+                $scope.footnote = "Komuś się NIE podoba :(";
 
             }
             if(annotation.eventType == 'comment') {
+                console.log(annotation)
                 $scope.footnote = annotation.comment;
             }
             $scope.$apply()
