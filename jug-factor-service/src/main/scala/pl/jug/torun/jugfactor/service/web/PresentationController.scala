@@ -21,6 +21,7 @@ class PresentationController(annotationEventRepository: AnnotationEventRepositor
   }
   
   get("/") {
+    response.setHeader("Access-Control-Allow-Headers", request.getHeader("Access-Control-Request-Headers"))
     contentType="text/html"
 
     <html>
@@ -29,6 +30,7 @@ class PresentationController(annotationEventRepository: AnnotationEventRepositor
   }
 
    get("/:id") {
+     response.setHeader("Access-Control-Allow-Headers", request.getHeader("Access-Control-Request-Headers"))
      val id = new org.bson.types.ObjectId(params("id"));
      presentationRepository.byId(id) match {
        case Some(presentation) => {
@@ -49,6 +51,7 @@ class PresentationController(annotationEventRepository: AnnotationEventRepositor
 
 
   post("/") {
+    response.setHeader("Access-Control-Allow-Headers", request.getHeader("Access-Control-Request-Headers"))
     val presentation = parsedBody.extract[Presentation]
 
     presentationRepository.add(presentation)

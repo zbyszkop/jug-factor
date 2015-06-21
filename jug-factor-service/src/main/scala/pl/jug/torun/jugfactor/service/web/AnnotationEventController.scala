@@ -16,10 +16,11 @@ class AnnotationEventController(annotationEventRepository: AnnotationEventReposi
 
 
   options("/*"){
-    response.setHeader("Access-Control-Allow-Headers", request.getHeader("Access-Control-Request-Headers"));
+    response.setHeader("Access-Control-Allow-Headers", request.getHeader("Access-Control-Request-Headers"))
   }
   
   get("/") {
+    response.setHeader("Access-Control-Allow-Headers", request.getHeader("Access-Control-Request-Headers"))
     contentType="text/html"
 
     <html>
@@ -28,6 +29,7 @@ class AnnotationEventController(annotationEventRepository: AnnotationEventReposi
   }
 
   post("/") {
+    response.setHeader("Access-Control-Allow-Headers", request.getHeader("Access-Control-Request-Headers"))
     val annotationEventInput = parsedBody.extract[AnnotationEventInput]
 
     val annotationEvent = AnnotationEvent(System.currentTimeMillis(), annotationEventInput.eventType)
