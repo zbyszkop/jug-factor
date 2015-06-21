@@ -4,7 +4,7 @@ import org.bson.types.ObjectId
 import org.json4s._
 import org.scalatra.json.JacksonJsonSupport
 import org.scalatra.{BadRequest, NotFound, Ok, ScalatraServlet}
-import pl.jug.torun.jugfactor.service.core.{Presentation, PresentationRepository, AnnotationEventRepository}
+import pl.jug.torun.jugfactor.service.core.{PresentationOutput, Presentation, PresentationRepository, AnnotationEventRepository}
 
 class PresentationController(annotationEventRepository: AnnotationEventRepository,
                              presentationRepository: PresentationRepository) extends ScalatraServlet with JacksonJsonSupport {
@@ -20,20 +20,23 @@ class PresentationController(annotationEventRepository: AnnotationEventRepositor
     contentType="text/html"
 
     <html>
-      <head><title>Test</title></head>
-      <body>Test Body</body>
+      <body>Presentation controller</body>
     </html>
   }
 
    get("/:id") {
-     presentationRepository.byId(new org.bson.types.ObjectId(params("id"))) match {
+     val id = new org.bson.types.ObjectId(params("id"));
+     presentationRepository.byId(id) match {
        case Some(presentation) => {
          val startTime = presentation.startTime
          val endTime = presentation.startTime + presentation.duration * 1000
          log("startTime: " + startTime)
          log("endTime: " + endTime)
 
-         annotationEventRepository.all().filter(p => p.timestamp >= startTime && p.timestamp <= endTime).toList;
+         val annotations = annotationEventRepository.all().filter(p => p.timestamp >= startTime && p.timestamp <= endTime).toList;
+
+         PresentationOutput(id, presentation.title, presentation.url, presentation.startTime, presentation.duration,
+         annotations);
        }
        case None => NotFound(s"Location not found: ${params("id")}")
      }

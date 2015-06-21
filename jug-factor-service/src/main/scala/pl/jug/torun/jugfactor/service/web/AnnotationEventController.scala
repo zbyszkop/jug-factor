@@ -19,24 +19,9 @@ class AnnotationEventController(annotationEventRepository: AnnotationEventReposi
     contentType="text/html"
 
     <html>
-      <head><title>Test</title></head>
-      <body>Test Body</body>
+      <body>AnnotationEvent controller</body>
     </html>
   }
-
-   get("/:id") {
-     presentationRepository.byId(new org.bson.types.ObjectId(params("id"))) match {
-       case Some(presentation) => {
-         val startTime = presentation.startTime
-         val endTime = presentation.startTime + presentation.duration * 1000
-         log("startTime: " + startTime)
-         log("endTime: " + endTime)
-
-         annotationEventRepository.all().filter(p => p.timestamp >= startTime && p.timestamp <= endTime).toList;
-       }
-       case None => NotFound(s"Location not found: ${params("id")}")
-     }
-   }
 
   post("/") {
     val annotationEventInput = parsedBody.extract[AnnotationEventInput]
