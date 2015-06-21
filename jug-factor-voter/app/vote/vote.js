@@ -7,7 +7,7 @@ angular.module('myApp.vote', ['ngRoute','ngResource','myApp.resources'])
         controller: 'VoteCtrl'
     })
 }])
-.controller('VoteCtrl',['$scope','Events',function($scope,Events){
+.controller('VoteCtrl',['$scope','$timeout','Events',function($scope,$timeout,Events){
         $scope.comment='';
         $scope.alerts=[];
 
@@ -19,6 +19,7 @@ angular.module('myApp.vote', ['ngRoute','ngResource','myApp.resources'])
        $scope.dislike=function(){
            console.log("DISLIKE");
            vote("dislike");
+
        };
 
        var vote = function(type){
@@ -26,18 +27,26 @@ angular.module('myApp.vote', ['ngRoute','ngResource','myApp.resources'])
            vote.eventType=type;
            console.log("Vote!");
            console.log(vote);
-           vote.$save(function(){},errorDisplay);
+           vote.$save(function(){
+           $scope.alerts.unshift({type:"success",message:(type=='like'?"Polubiłeś":"Nie spodobało się")})
+           },errorDisplay);
        };
 
         $scope.addAlert = function(alert) {
-            $scope.alerts.push(alert);
+            $scope.alerts.unshift(alert);
 
         };
+
+        $timeout(function(){
+          $scope.closeAlert($scope.alerts.length-1);
+        },5000);
 
         $scope.closeAlert = function(index) {
-            console.log("remove alert");
-            $scope.alerts.splice(index, 1);
+            console.log($scope.alerts.splice(index, 1));
+
         };
+
+
 
         $scope.comments = function(){
             var comment = new Events();
@@ -45,7 +54,7 @@ angular.module('myApp.vote', ['ngRoute','ngResource','myApp.resources'])
             comment.comment=$scope.comment;
             comment.$save(function(){
                 $scope.comment='';
-                $scope.alerts.push({type:"success",message:"Umieszczono komentarz"})
+                $scope.alerts.unshift({type:"success",message:"Umieszczono komentarz"})
             }, errorDisplay);
 
             console.log("Comment: "+$scope.comment);
@@ -53,6 +62,6 @@ angular.module('myApp.vote', ['ngRoute','ngResource','myApp.resources'])
 
         var errorDisplay=function (error){
             console.log(error);
-            $scope.alerts.push({type:"danger","message":error.statusText})
+            $scope.alerts.unshift({type:"danger","message":error.statusText})
         };
 }]);
