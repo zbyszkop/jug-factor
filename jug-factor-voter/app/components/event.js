@@ -2,5 +2,5 @@
 
 angular.module('myApp.resources',['ngResource']).
     factory('Events',['$resource',function($resource){
-        return $resource('http://localhost:8080/annotationEvent/');
+        return $resource('http://172.16.101.151:8080/annotationEvent/');
     }]);

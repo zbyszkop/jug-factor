@@ -1,7 +1,7 @@
 <div ng-controller="VoteCtrl" id="vote">
     <div class="form-group">
-        <button class="btn like" ng-click="like()"><i class="fa fa-thumbs-o-up fa-4x"></i></button>
-        <button ng-click="dislike()" class="btn dislike"><i class="fa fa-thumbs-o-down fa-4x"></i></button>
+        <button class="btn like" ng-click="like()"><i class="fa fa-thumbs-o-up" style="font-size: 10em"></i></button>
+        <button ng-click="dislike()" class="btn dislike"><i class="fa fa-thumbs-o-down" style="font-size: 10em"></i></button>
     </div>
 
     <label for="comment">Skomentuj:</label>
@@ -11,6 +11,6 @@
 
     </div>
 
-    <alert class="form-error" ng-repeat="alert in alerts" type="{{alert.type}}">{{alert.message}}</alert>
+    <alert class="form-error" ng-repeat="alert in alerts" type="{{alert.type}}" dismissOnTimeout="5" close="closeAlert($index)" >{{alert.message}}</alert>
 
 </div>

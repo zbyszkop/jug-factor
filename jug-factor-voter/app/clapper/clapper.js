@@ -5,8 +5,12 @@ angular.module('myApp.clapper', ['ngRoute','ngResource','myApp.resources'])
             controller: 'ClapperCtrl'
         })
     }])
-    .controller('ClapperCtrl',['$scope','Events',function($scope,Events){
+    .controller('ClapperCtrl',['$scope','Events','$interval',function($scope,Events,$interval){
         $scope.color='red';
+        $scope.date = new Date();
+        $interval(function(){
+            $scope.date=new Date();
+        },1000);
         $scope.claps=function(){
 
             if($scope.color=='red') {
