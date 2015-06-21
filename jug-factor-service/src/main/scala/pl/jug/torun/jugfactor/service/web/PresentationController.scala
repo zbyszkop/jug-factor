@@ -22,11 +22,8 @@ class PresentationController(annotationEventRepository: AnnotationEventRepositor
   
   get("/") {
     response.setHeader("Access-Control-Allow-Headers", request.getHeader("Access-Control-Request-Headers"))
-    contentType="text/html"
-
-    <html>
-      <body>Presentation controller</body>
-    </html>
+    
+    presentationRepository.all()
   }
 
    get("/:id") {

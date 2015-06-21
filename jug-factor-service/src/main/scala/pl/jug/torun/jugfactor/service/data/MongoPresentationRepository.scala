@@ -7,6 +7,9 @@ import pl.jug.torun.jugfactor.service.core.{Presentation, PresentationRepository
 
 class MongoPresentationRepository(collection: MongoCollection) extends PresentationRepository with SalatContext {
 
+  def all(): Seq[Presentation] =  collection.find().toSeq.map(grater[Presentation].asObject(_))
+
+  
   def add(presentation: Presentation): Unit = {
     collection.insert(grater[Presentation].asDBObject(presentation))
   }

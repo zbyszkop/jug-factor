@@ -1,3 +1,5 @@
 package pl.jug.torun.jugfactor.service.core
 
-case class Presentation(/*id: org.bson.types.ObjectId,*/ title: String, url: String, startTime: Long, duration: Long)
+import org.bson.types.ObjectId
+
+case class Presentation(id:ObjectId, title: String, url: String, startTime: Long, duration: Long)
