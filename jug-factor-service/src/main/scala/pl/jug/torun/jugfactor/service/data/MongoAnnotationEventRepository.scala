@@ -8,9 +8,12 @@ import pl.jug.torun.jugfactor.service.core.{AnnotationEvent, AnnotationEventRepo
 
 class MongoAnnotationEventRepository(collection: MongoCollection) extends AnnotationEventRepository with SalatContext {
 
-   def all(): Seq[AnnotationEvent] = {
-     collection.find
-               .toList.map(o => grater[AnnotationEvent].asObject(o))
-   }
+  def all(): Seq[AnnotationEvent] = {
+   collection.find
+             .toList.map(o => grater[AnnotationEvent].asObject(o))
+  }
 
+  def add(annotationEvent: AnnotationEvent): Unit = {
+    collection.insert(grater[AnnotationEvent].asDBObject(annotationEvent))
+  }
  }

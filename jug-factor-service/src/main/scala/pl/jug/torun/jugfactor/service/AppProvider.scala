@@ -16,6 +16,7 @@ object AppProvider extends App with WebModule with DataModule {
    webCtx.setContextPath(config.getString("http.path"))
    webCtx.setResourceBase("/WEB-INF")
    webCtx.addServlet(new ServletHolder(presentationController), "/presentation/*")
+   webCtx.addServlet(new ServletHolder(annotationEventController), "/annotationEvent/*")
 
    server.setHandler(webCtx)
    server.start

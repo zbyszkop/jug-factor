@@ -8,5 +8,6 @@ trait WebModule {
   def presentationRepository: PresentationRepository
 
   lazy val presentationController = wire[PresentationController]
+  lazy val annotationEventController = wire[AnnotationEventController]
 
 }
