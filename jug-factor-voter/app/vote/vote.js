@@ -35,6 +35,7 @@ angular.module('myApp.vote', ['ngRoute','ngResource','myApp.resources'])
         };
 
         $scope.closeAlert = function(index) {
+            console.log("remove alert");
             $scope.alerts.splice(index, 1);
         };
 
@@ -42,7 +43,11 @@ angular.module('myApp.vote', ['ngRoute','ngResource','myApp.resources'])
             var comment = new Events();
             comment.eventType="comment";
             comment.comment=$scope.comment;
-            comment.$save(function(){}, errorDisplay);
+            comment.$save(function(){
+                $scope.comment='';
+                $scope.alerts.push({type:"success",message:"Umieszczono komentarz"})
+            }, errorDisplay);
+
             console.log("Comment: "+$scope.comment);
         };
 
