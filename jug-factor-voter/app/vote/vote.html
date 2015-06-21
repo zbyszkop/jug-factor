@@ -1,4 +1,13 @@
-<form ng-controller="VoteCtrl">
-    <button ng-click="like()"><i class="fa fa-thumbs-o-up fa-3x"></i></button>
-    <button ng-click="dislike()"><i class="fa fa-thumbs-o-down fa-3x"></i></button>
+<div ng-controller="VoteCtrl" id="vote">
+    <div class="btn-toolbar">
+        <button class="btn like" ng-click="like()"><i class="fa fa-thumbs-o-up fa-4x"></i></button>
+        <button ng-click="dislike()" class="btn dislike"><i class="fa fa-thumbs-o-down fa-4x"></i></button>
+    </div>
+
+    <label for="comment">Skomentuj:</label>
+    <div class="form-group">
+        <textarea id="comment" data-ng-model="comment" class="form-control"></textarea><br>
+        <button ng-click="comments()" class="btn btn-primary">OK</button>
+
+    </div>
 </form>
