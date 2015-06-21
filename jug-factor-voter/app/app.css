@@ -1,33 +1,28 @@
 /* app css stylesheet */
 html,body{height:100%}
-
-.menu {
-  list-style: none;
-  border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
+#vote{
+    margin-left: 10px;
+    margin-top: 10px;
+    text-align: center;
 }
 
-.menu:before {
-  content: "[";
+button.btn.dislike{
+    background: #cf293f none no-repeat;
+    filter: none;
 }
 
-.menu:after {
-  content: "]";
+button.btn.like{
+    background: #003cb3 none no-repeat;
+    filter: none;
+
 }
 
-.menu > li {
-  display: inline;
-}
+button.btn.btn-primary{
+    background: #13c2b3 none no-repeat;
 
-.menu > li:before {
-  content: "|";
-  padding-right: 0.3em;
-}
-
-.menu > li:nth-child(1):before {
-  content: "";
-  padding: 0;
+    width: 30%;
+    height: 5em;
+    filter: none;
 }
 
 div.red {
@@ -36,4 +31,8 @@ div.red {
 
 div.green {
   background-color: green;
+}
+
+.form-control {
+    border-radius: 6px;
 }
