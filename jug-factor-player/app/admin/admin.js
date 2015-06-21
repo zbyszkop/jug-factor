@@ -13,6 +13,7 @@ angular.module('myApp.admin', ['ngRoute', 'ngResource'])
         $scope.presentation=new Presentation();
         $scope.events = [];
         $scope.clapper={};
+        $scope.alerts=[];
         //new Events().query(
         //    {eventType:'clapper'}
         //).$promise.then(function(data){
@@ -40,7 +41,7 @@ angular.module('myApp.admin', ['ngRoute', 'ngResource'])
 
             } else {
 
-                delete $scope.pop;
+                Popcorn.destroy($scope.pop);
             }
         },true)
 
@@ -52,8 +53,12 @@ angular.module('myApp.admin', ['ngRoute', 'ngResource'])
 
                 $scope.presentation.startTime=$scope.clapper.timestamp;
                 console.log($scope.presentation);
-                $scope.presentation.$save();
-                window.location.reload();
+                $scope.presentation.$save(function(){
+                    $scope.presentation=new Presentation();
+                    $scope.alerts.unshift({type:'success',message:'Zapisano przezentacje'});
+                    Popcorn.destroy($scope.pop);
+                });
+
             }
         }
 
